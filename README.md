@@ -3,7 +3,6 @@
 
 ProjectFlow is a full-featured project management system I built with Ruby on Rails 8, Turbo and TailwindCSS. It enables teams to collaborate on projects, manage tasks, assign work, comment in real-time, and track deadlines through the dashboard.
 
----
 ## Features
 
 ### User Accounts & Permissions
