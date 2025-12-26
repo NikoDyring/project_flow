@@ -1,0 +1,35 @@
+<div class="min-h-screen bg-gray-50">
+  <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center mb-8">
+      <h1 class="text-3xl font-bold text-gray-900">My Projects</h1>
+      <% if policy(Project.new).create? %>
+        <%= link_to "New Project", new_project_path, class: "bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg" %>
+      <% end %>
+    </div>
+
+    <% if @projects.any? %>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <% @projects.each do |project| %>
+          <div class="bg-white rounded-lg shadow hover:shadow-md transition">
+            <%= link_to project_path(project) do %>
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2"><%= project.name %></h3>
+                <p class="text-gray-600 mb-4"><%= truncate(project.description, length: 100) %></p>
+                <div class="text-sm text-gray-500">
+                  Owner: <%= project.owner.email %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="text-center py-12">
+        <p class="text-gray-500 text-lg">No projects yet.</p>
+        <% if policy(Project.new).create? %>
+          <%= link_to "Create your first project", new_project_path, class: "mt-4 inline-block text-blue-600 hover:underline" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

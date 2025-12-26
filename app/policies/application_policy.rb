@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ApplicationPolicy
   attr_reader :user, :record
 
@@ -9,11 +7,11 @@ class ApplicationPolicy
   end
 
   def index?
-    false
+    true
   end
 
   def show?
-    false
+    scope.where(id: record.id).exists?
   end
 
   def create?
@@ -37,17 +35,21 @@ class ApplicationPolicy
   end
 
   class Scope
+    attr_reader :user, :scope
+
     def initialize(user, scope)
       @user = user
       @scope = scope
     end
 
     def resolve
-      raise NoMethodError, "You must define #resolve in #{self.class}"
+      scope.all
     end
+  end
 
-    private
+  private
 
-    attr_reader :user, :scope
+  def scope
+    self.class::Scope.new(user, record.class).resolve
   end
 end
