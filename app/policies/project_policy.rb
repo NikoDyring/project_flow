@@ -18,5 +18,6 @@ class ProjectPolicy < ApplicationPolicy
       else
         scope.where(owner: user).or(scope.joins(:tasks).where(tasks: { assignee_id: user.id })).distinct
       end
+    end
   end
 end

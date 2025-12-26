@@ -3,6 +3,6 @@ class Project < ApplicationRecord
   has_many :tasks, dependent: :destroy
 
   validates :name, :owner_id, presence: true
-  
+
   attribute :archived, :boolean, default: false
 end
