@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
-  
+
   root "home#index"
-  
+
   authenticate :user do
-    get '/dashboard', to: 'dashboards#show'
+    get "/dashboard", to: "dashboards#show"
     resources :projects do
       member do
         patch :archive

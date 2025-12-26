@@ -1,8 +1,8 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_project, only: [:show, :edit, :archive]
-  before_action :authorize_project, only: [:show, :edit, :archive]
-  
+  before_action :set_project, only: [ :show, :edit, :archive ]
+  before_action :authorize_project, only: [ :show, :edit, :archive ]
+
   def index
     @projects = policy_scope(Project).where(archived: false).order(created_at: :desc)
   end
